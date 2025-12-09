@@ -1,17 +1,18 @@
-FROM ubuntu:20.10
+FROM ubuntu:22.04
 
 # Define variables.
-ARG GOVERSION=1.15.15
-ARG ARCH=amd64
+ARG GOVERSION=1.21.5
+ARG TARGETARCH
+ARG ARCH=${TARGETARCH:-arm64}
 
 # Download development environment.
 RUN apt-get update && \
     apt-get install -y \
-        libbpf-dev \
-        make \
-        clang \
-        llvm \
-        libelf-dev
+    libbpf-dev \
+    make \
+    clang \
+    llvm \
+    libelf-dev
 
 # Install Go specific version.
 RUN apt-get install -y wget && \
